@@ -32,8 +32,11 @@ npm start
 
 ## Demo
 
-Insert gif or link to demo
+Deployment:
+https://swipe-eight.vercel.app/
 
+Quick Demo:
+https://github.com/adwait12345/swipe/blob/master/quickDemo.pdf
 
 ## Acknowledgements
 
