@@ -1,23 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Container from "react-bootstrap/Container";
 import { Route, Routes } from "react-router-dom";
-import Invoice from "./pages/Invoice";
-import InvoiceList from "./pages/InvoiceList";
+
+import Home from "./layout/home";
+import Products from "./components/Products";
+import Product_Sliderbar from "./components/SliderBar/Product";
+import Category_Sliderbar from "./components/SliderBar/Category";
+import EditProducts from "./components/EditProducts";
+import InvoiceTab from "./components/Invoice";
+import Group_Sliderbar from "./components/SliderBar/Group";
 
 const App = () => {
+  const [SliderOpen, setSliderOpen] = useState({
+    open: false,
+    id: "",
+    type: "",
+  });
+  const [CategorySliderOpen, setCategorySliderOpen] = useState({
+    open: false,
+    id: "",
+    type: "",
+  });
+  const [GroupSliderOpen, setGroupSliderOpen] = useState({
+    open: false,
+    id: "",
+    type: "",
+  });
+
   return (
-    <div className="App d-flex flex-column align-items-center justify-content-center w-100">
-      <Container>
-        <Routes>
-          <Route path="/" element={<InvoiceList />} />
-          <Route path="/create" element={<Invoice />} />
-          <Route path="/create/:id" element={<Invoice />} />
-          <Route path="/edit/:id" element={<Invoice />} />
-        </Routes>
-      </Container>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="/" element={<InvoiceTab />} />
+          <Route
+            path="/create-new"
+            element={
+              <Products
+                SliderOpen={SliderOpen}
+                setSliderOpen={setSliderOpen}
+                CategorySliderOpen={CategorySliderOpen}
+                setCategorySliderOpen={setCategorySliderOpen}
+                GroupSliderOpen={GroupSliderOpen}
+                setGroupSliderOpen={setGroupSliderOpen}
+              />
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <EditProducts
+                SliderOpen={SliderOpen}
+                setSliderOpen={setSliderOpen}
+                CategorySliderOpen={CategorySliderOpen}
+                setCategorySliderOpen={setCategorySliderOpen}
+                GroupSliderOpen={GroupSliderOpen}
+                setGroupSliderOpen={setGroupSliderOpen}
+              />
+            }
+          />
+          <Route
+            path="/edit/:id"
+            element={
+              <Products
+                SliderOpen={SliderOpen}
+                setSliderOpen={setSliderOpen}
+                CategorySliderOpen={CategorySliderOpen}
+                setCategorySliderOpen={setCategorySliderOpen}
+                GroupSliderOpen={GroupSliderOpen}
+                setGroupSliderOpen={setGroupSliderOpen}
+              />
+            }
+          />
+        </Route>
+      </Routes>
+
+      <Product_Sliderbar
+        setSliderOpen={setSliderOpen}
+        SliderOpen={SliderOpen}
+        CategorySliderOpen={CategorySliderOpen}
+        setCategorySliderOpen={setCategorySliderOpen}
+      />
+      <Category_Sliderbar
+        CategorySliderOpen={CategorySliderOpen}
+        setCategorySliderOpen={setCategorySliderOpen}
+      />
+      <Group_Sliderbar
+        GroupSliderOpen={GroupSliderOpen}
+        setGroupSliderOpen={setGroupSliderOpen}
+      />
+    </>
   );
 };
 
